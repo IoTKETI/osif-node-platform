@@ -1,0 +1,19 @@
+{
+  "name": "device-platform",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "promise-polyfill": "^6.0.2",
+    "angular-bootstrap": "^2.5.0",
+    "angular-ui-router": "^1.0.5",
+    "lodash": "^4.17.4",
+    "jquery-ui": "^1.12.1",
+    "noto-sans-kr": "^0.1.1",
+    "angular-cookies": "^1.6.6"
+  }
+}

@@ -1,0 +1,39 @@
+<div ng-controller="applicationImagesController" ng-init="init()">
+
+
+
+  <div class="app-img-list-filter">
+
+  </div>
+  <div class="app-img-list">
+
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <th scope="col">SEQ</th>
+        <th scope="col">ID</th>
+        <th scope="col">Owner/Repository</th>
+        <th scope="col">Name</th>
+        <th scope="col">Tag</th>
+        <th scope="col">State</th>
+        <th scope="col"></th>
+      </thead>
+      <tbody>
+        <tr class="app-image" ng-repeat="appImage in applicationImagesList track by $index">
+          <th class="image-seq app-image-field"  scope="row" ng-bind="$index"></th>
+          <td class="image-id app-image-field" ng-bind="appImage.shortId"></td>
+          <td class="image-owner app-image-field" ng-bind="appImage.owner"></td>
+          <td class="image-name app-image-field" ng-bind="appImage.name"></td>
+          <td class="image-tag app-image-field" ng-bind="appImage.tag"></td>
+          <td class="image-state app-image-field" ng-bind="appImage.container?appImage.container.state:''"></td>
+          <td class="image-actions">
+            <button class="run-app-image" ng-click="runApplication(appImage)" ng-show="appImage.container == null">run</button>
+            <button class="run-app-image" ng-click="startApplication(appImage)" ng-show="appImage.container != null && appImage.container.state == 'exited'">start</button>
+            <button class="run-app-image" ng-click="stopApplication(appImage)" ng-show="appImage.container != null && appImage.container.state == 'running'">stop</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+</div>

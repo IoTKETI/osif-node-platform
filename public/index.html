@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>CIoT Device Platform</title>
+  <meta app-version="V1.0-r20171122-01" />
+
+  <link rel='stylesheet' href='./css/style.css' />
+
+  <script src="./components/jquery/dist/jquery.min.js"></script>
+  <script src="./components/jquery-ui/jquery-ui.min.js"></script>
+  <script src="./components/lodash/dist/lodash.min.js"></script>
+
+  <link rel='stylesheet' href='./components/bootstrap/dist/css/bootstrap.css' />
+  <script src='./components/bootstrap/dist/js/bootstrap.js'></script>
+
+  <script src="./components/promise-polyfill/promise.js"></script>
+
+  <script src="./components/angular/angular.js"></script>
+  <script src="./components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="./components/angular-bootstrap/ui-bootstrap.js"></script>
+  <script src="./components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+  <script src="./app/main.js"></script>
+  <script src="./app/appimages.controller.js"></script>
+  <script src="./app/appimages.service.js"></script>
+</head>
+<body lang="ko" ng-app="ciotDevicePlatform">
+<!-- NAVIGATION -->
+<nav class="top-navbar navbar navbar-default navbar-static-top" role="navigation">
+  <a class="navbar-brand" ui-sref="#"></a>
+  <ul class="nav navbar-nav">
+
+  </ul>
+  <span class="pull-right"></span>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="root-container">
+
+  <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+  <!--
+    login
+    join
+    intro
+  -->
+  <div ui-view class="main-view"></div>
+
+</div>
+
+
+</body>
+</html>
