@@ -1,0 +1,110 @@
+<div flex layout="column" class="myservice" ng-controller="myServiceController" ng-init="init()">
+
+  <md-content layout="row" layout-padding layout-wrap>
+
+    <div class="dummy-layout" flex>
+      <md-card class="myservice-list">
+        <md-card-header class="md-card-header-icon md-card-header-green">
+          <div class="card-icon">
+            <md-icon md-font-icon="fas fa-share-square"></md-icon>
+          </div>
+          <h3 class="title">My 서비스 목록</h3>
+        </md-card-header>
+        <md-card-content>
+
+          <md-content class="table-striped table-hover">
+            <md-toolbar class="md-menu-toolbar table-toolbar">
+              <div layout="row">
+
+                <span flex></span>
+
+                <md-input-container class="no-error no-label">
+                  <label>Search records</label>
+                  <input type="search" placeholder="Search records" ng-model="searchKeyword">
+                </md-input-container>
+
+              </div>
+            </md-toolbar>
+            <md-content layout="row" style="background-color: white;">
+              <div flex layout="row" layout-wrap>
+
+                <div flex="20" flex-xl="20"  flex-lg="50" flex-md="50" flex-sm="100" ng-repeat="myservice in myServiceList | filter:searchKeyword">
+                  <md-card class="myservice-item">
+                    <md-card-title class="md-headline" flex layout="column">
+                      <md-card-title-text>
+                        <div class="md-headline" ng-bind="myservice.serviceName"></div>
+                        <div layout="row">
+                          <span flex="none" class="md-subhead" ng-bind="getUserName(myservice.owner)"></span>
+                          <span flex></span>
+                          <span flex="none" class="md-subhead" ng-bind="getVersion(myservice.versionCode)"></span>
+                        </div>
+                      </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-content>
+                      <div class="">
+                        <div class="" layout="column" >
+                          <md-list flex style="height: 200px; overflow: auto;">
+                            <md-subheader ng-if="myservice.openData.global">Global open data</md-subheader>
+
+                            <md-list-item class="md-2-line" ng-repeat="openData in myservice.openData.global">
+                              <div class="md-avatar" >
+                                <md-icon md-font-icon="fas fa-cloud-upload-alt" ></md-icon>
+                              </div>
+                              <div class="md-list-item-text">
+                                <h3 ng-bind="openData.name"></h3>
+                                <p ng-bind="openData.description"></p>
+                              </div>
+                            </md-list-item>
+
+                            <md-divider ng-if="myservice.openData.local"></md-divider>
+                            <md-subheader  ng-if="myservice.openData.local">Local open data</md-subheader>
+
+                            <md-list-item class="md-2-line" ng-repeat="openData in myservice.openData.local">
+                              <div class="md-avatar" >
+                                <md-icon md-font-icon="fas fa-microchip" ></md-icon>
+                              </div>
+                              <div class="md-list-item-text">
+                                <h3 ng-bind="openData.name"></h3>
+                                <p ng-bind="openData.description"></p>
+                              </div>
+                            </md-list-item>
+                          </md-list>
+
+                        </div>
+                      </div>
+                    </md-card-content>
+                    <md-card-actions layout="row">
+                      <div flex="none">
+                        <div ng-bind="myservice.createdAt|date"></div>
+                      </div>
+                      <div flex></div>
+                      <div flex="none" class="">
+                        <div class="" layout="row">
+                          <md-button class="md-icon-button add-to-my-list" aria-label="Add to my service">
+                            <md-icon md-font-icon="fas fa-heart"></md-icon>
+                          </md-button>
+                          <md-button class="md-icon-button delete" aria-label="Delete service">
+                            <md-icon md-font-icon="fas fa-trash-alt"></md-icon>
+                          </md-button>
+                          <md-button class="md-icon-button show-more" aria-label="Show more">
+                            <md-icon md-font-icon="fas fa-info"></md-icon>
+                          </md-button>
+                        </div>
+                      </div>
+                    </md-card-actions>
+
+
+                  </div>
+
+              </div>
+            </md-content>
+          </md-content>
+
+        </md-card-content>
+      </md-card>
+    </div>
+
+  </md-content>
+
+</div>

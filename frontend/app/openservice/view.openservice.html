@@ -1,0 +1,198 @@
+<div flex layout="column" class="dashboard" ng-controller="openServiceController" ng-init="init()">
+
+  <md-content layout="row" layout-padding layout-wrap>
+
+    <div class="dummy-layout" flex>
+      <md-card class="openservice-list">
+        <md-card-header class="md-card-header-icon md-card-header-green">
+          <div class="card-icon">
+            <md-icon md-font-icon="fas fa-share-square"></md-icon>
+          </div>
+          <h3 class="title">공개 서비스 목록</h3>
+        </md-card-header>
+        <md-card-content>
+
+          <md-content class="paginated-table table-striped table-hover">
+            <md-toolbar class="md-menu-toolbar table-toolbar">
+              <div layout="row">
+
+                <md-input-container class="no-error no-label">
+                  <label>Per pages</label>
+                  <md-select ng-model="rowsPerPage">
+                    <md-option ng-repeat="state in [10, 20, 30, 40]" ng-value="state">
+                      {{state}}
+                    </md-option>
+                  </md-select>
+                </md-input-container>
+
+                <span flex></span>
+
+                <md-input-container class="no-error no-label">
+                  <label>Search records</label>
+                  <input type="search" placeholder="Search records" ng-model="searchKeyword">
+                </md-input-container>
+
+              </div>
+            </md-toolbar>
+            <md-content class="md-table-content table-striped table-hover" layout="row" style="background-color: white;">
+              <table flex>
+                <thead>
+                  <tr>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container">
+                        <div class="md-table-head-label">이름</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container">
+                        <div class="md-table-head-label">버전</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">개발자</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">데이터</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">사용자 수</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">등록일</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">d</div>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="md-table-row" ng-repeat="openservice in openServiceList">
+                    <td class="md-table-cell" flex>
+                      <div class="md-table-cell-container" ng-bind="openservice.serviceName"></div>
+                    </td>
+                    <td class="md-table-cell">
+                      <div class="md-table-cell-container" ng-bind="getUserName(openservice.owner)"></div>
+                    </td>
+                    <td class="md-table-cell">
+                      <div class="md-table-cell-container" ng-bind="getVersion(openservice.versionCode)"></div>
+                    </td>
+                    <td class="md-table-cell text-center">
+                      <div class="md-table-cell-container" layout="row">
+                        <md-button class="md-icon-button openservice-data-type" ng-class="openservice.openData.local ? 'on': 'off'">
+                          <md-icon md-font-icon="fas fa-microchip" ></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button openservice-data-type" ng-class="openservice.openData.global ? 'on': 'off'">
+                          <md-icon md-font-icon="fas fa-cloud-upload-alt" ></md-icon>
+                        </md-button>
+                      </div>
+                    </td>
+                    <td class="md-table-cell text-right">
+                      <div class="md-table-cell-container" ng-bind="openservice.userCount|number"></div>
+                    </td>
+                    <td class="md-table-cell text-center">
+                      <div class="md-table-cell-container" ng-bind="openservice.createdAt|date"></div>
+                    </td>
+                    <td class="md-table-cell text-center">
+                      <div class="md-table-cell-container list-command-button" layout="row">
+                        <md-button class="md-icon-button add-to-my-list" aria-label="Add to my service">
+                          <md-icon md-font-icon="fas fa-heart"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button delete" aria-label="Delete service">
+                          <md-icon md-font-icon="fas fa-trash-alt"></md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button show-more" aria-label="Show more">
+                          <md-icon md-font-icon="fas fa-info"></md-icon>
+                        </md-button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <thead>
+                <tr>
+                  <th class="md-table-head">
+                    <div class="md-table-head-container">
+                      <div class="md-table-head-label">이름</div>
+                    </div>
+                  </th>
+                  <th class="md-table-head">
+                    <div class="md-table-head-container">
+                      <div class="md-table-head-label">버전</div>
+                    </div>
+                  </th>
+                  <th class="md-table-head">
+                    <div class="md-table-head-container md-disabled">
+                      <div class="md-table-head-label">개발자</div>
+                    </div>
+                  </th>
+                  <th class="md-table-head">
+                    <div class="md-table-head-container md-disabled">
+                      <div class="md-table-head-label">데이터</div>
+                    </div>
+                  </th>
+                  <th class="md-table-head">
+                    <div class="md-table-head-container md-disabled">
+                      <div class="md-table-head-label">사용자 수</div>
+                    </div>
+                  </th>
+                  <th class="md-table-head">
+                    <div class="md-table-head-container md-disabled">
+                      <div class="md-table-head-label">등록일</div>
+                    </div>
+                  </th>
+                  <th class="md-table-head">
+                    <div class="md-table-head-container md-disabled">
+                      <div class="md-table-head-label">d</div>
+                    </div>
+                  </th>
+                </tr>
+                </thead>
+              </table>
+            </md-content>
+          </md-content>
+
+        </md-card-content>
+        <md-card-actions class="md-alignment-left">
+          <md-content layout="row">
+            <div flex="none">
+              총 <span ng-bind="paging.total"></span>개 중 <span ng-bind="paging.begin"></span> - <span ng-bind="paging.end"></span>
+            </div>
+            <span flex></span>
+
+            <div flex="none">
+              <ul class="page-list-control" layout="row">
+                <li class="page-list-item prev-page-button">
+                  <md-button class="md-icon-button" ng-click="moveToPrevPage()" ng-disabled="paging.current == 1">
+                    <md-icon md-font-icon="fas fa-angle-double-left"></md-icon>
+                  </md-button>
+                </li>
+                <li class="page-list-item page-number-button" ng-repeat="page in paging.pageList">
+                  <md-button ng-class="paging.current == page ? 'md-fab md-mini md-accent' : 'md-icon-button'"  ng-click="moveToPage(page)">
+                    <span ng-bind="page"></span>
+                  </md-button>
+                </li>
+                <li class="page-list-item prev-page-button">
+                  <md-button class="md-icon-button"  ng-click="moveToNextPage()" ng-disabled="paging.current == paging.total">
+                    <md-icon md-font-icon="fas fa-angle-double-right"></md-icon>
+                  </md-button>
+                </li>
+              </ul>
+            </div>
+          </md-content>
+
+        </md-card-actions>
+      </md-card>
+    </div>
+
+  </md-content>
+
+</div>

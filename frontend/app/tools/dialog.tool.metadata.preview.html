@@ -1,0 +1,33 @@
+<md-dialog aria-label="서비스 메타데이터 미리보기" id="create-metadata-dialog">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>서비스 메타데이터 미리보기</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-font-icon="fas fa-times" aria-label="대화상자 취소"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content style="max-width:800px; padding: 30px;">
+
+      <json-formatter open="5" json="metadata"></json-formatter>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+
+      <md-button class="md-raised" ng-click="cancel()">
+        <md-icon md-font-icon="fas fa-times"></md-icon> 닫기
+      </md-button>
+      <span flex></span>
+
+      <textarea ng-bind="metadataString" id="preview-text1" style="position: absolute; left: -10px; width: 0px; height: 0px"></textarea>
+      <md-button class="md-raised md-primary" ngclipboard data-clipboard-target="#preview-text1">
+        <md-icon md-font-icon="far fa-copy"></md-icon> 클립보드 복사
+      </md-button>
+
+    </md-dialog-actions>
+  </form>
+</md-dialog>

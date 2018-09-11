@@ -1,0 +1,43 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.5em;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+.keti-ci {
+  background-color: white;
+  margin: auto;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  padding: 7px 0;
+}
+.keti-ci img {
+  width: 180px;
+}
+
+
+md-input-container.no-label {
+  margin-top: 0;
+}
+md-input-container.no-error {
+  margin-bottom: 0;
+}
+
+md-input-container.no-label label {
+  display: none;
+}
+md-input-container.no-error .md-errors-spacer {
+  display: none;
+}
