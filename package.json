@@ -1,0 +1,29 @@
+{
+  "name": "ciot-platform",
+  "version": "0.0.1",
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "DEBUG=keti* node ./backend/www"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "js-base64": "^2.4.8",
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.10",
+    "morgan": "^1.6.1",
+    "node-docker-api": "^1.1.22",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "serve-favicon": "^2.3.0",
+    "shortid": "^2.2.12",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "debug": "^2.6.9"
+  }
+}

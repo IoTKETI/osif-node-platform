@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+var xstring = require('./libs/xstring.js');
+global.CONFIG = require('./config.js')();
+
+global.debug = {
+  log : require('debug')('keti.log')
+};
+
+var app = require('../app');
+
+var port = global.CONFIG.node.port = normalizePort(global.CONFIG.node.port || '3000');
+app.set('port', port);
+
+
+
+
+var server = app.listen(app.get('port'), function() {
+  debug.log('http://localhost:' + server.address().port);
+});
+
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+
+
+process.on('unhandledRejection', function(reason, p){
+  debug.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+});

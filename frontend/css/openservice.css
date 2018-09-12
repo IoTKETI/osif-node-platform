@@ -1,0 +1,49 @@
+
+md-toolbar.table-toolbar {
+  font-size: 14px;
+  min-height: 30px;
+}
+
+.md-table-head {
+  vertical-align: middle;
+}
+.md-table-head-container {
+  height: auto;
+}
+.md-table-head-label {
+  text-align: center;
+  font-weight: 300;
+  height: 40px;
+  line-height: 40px;
+}
+
+.md-table-cell {
+  vertical-align: middle;
+}
+.md-table-cell-container {
+  min-height: 40px;
+  line-height: 40px;
+}
+
+
+.openservice-data-type md-icon {
+  color: #dddddd;
+}
+
+.openservice-data-type.on md-icon {
+  color: #dd8912;
+}
+
+
+.page-list-control .page-list-item {
+  list-style:none;
+}
+.page-list-control .page-list-item .md-button{
+  margin: 0 1px !important;
+}
+
+
+.myservice .md-subheader .md-subheader-inner {
+  display: block;
+  padding: 6px 16px !important;
+}

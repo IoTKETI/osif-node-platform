@@ -1,0 +1,64 @@
+<md-dialog aria-label="가상공간 생성" id="create-vspace">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>가상공간 생성</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-font-icon="fas fa-times" aria-label="대화상자 취소"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content style="max-width:800px">
+      <div class="md-dialog-content">
+        <fieldset class="standard">
+          <legend>가상공간 종류</legend>
+
+
+          <md-radio-group ng-model="formData.spaceType" layout="row" layout-wrap ng-required="true">
+            <md-radio-button ng-repeat="type in spaceTypeList"
+                             flex="30"
+                             ng-value="type.name"
+                             aria-label="{{type.name}}" >
+              <md-icon class="space-type-radio" md-font-icon="{{type.icon}}" ng-class="type.color"></md-icon>
+              <span ng-bind="type.name"></span>
+
+            </md-radio-button>
+          </md-radio-group>
+        </fieldset>
+
+        <md-input-container class="md-block">
+          <label>가상공간 제목</label>
+          <input ng-model="formData.spaceTitle" type="text" ng-required="true">
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <label>설명</label>
+          <textarea ng-model="formData.description" type="text" rows="4"></textarea>
+        </md-input-container>
+
+        <div layout="row">
+          <md-input-container >
+            <label>가상공간 위도</label>
+            <input ng-model="formData.gpsPosition.lat" type="text" readonly>
+          </md-input-container>
+          <md-input-container >
+            <label>가상공간 경도</label>
+            <input ng-model="formData.gpsPosition.lng" type="text" readonly>
+          </md-input-container>
+        </div>
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()">
+        취소
+      </md-button>
+      <md-button ng-click="create()">
+        생성
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

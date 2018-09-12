@@ -1,0 +1,11 @@
+{
+  "default" : {
+    "node" : {
+      "port": "8899"
+    },
+
+    "cloudPlatform": {
+      "api": "http://localhost:8889"
+    }
+  }
+}
