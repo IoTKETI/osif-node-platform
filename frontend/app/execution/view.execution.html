@@ -1,0 +1,127 @@
+<div flex layout="column" class="service-image" ng-controller="executionController" ng-init="init()">
+
+  <md-content layout="row" layout-padding layout-wrap>
+
+    <div class="dummy-layout" flex>
+      <md-card class="openservice-list">
+        <md-card-header class="md-card-header-icon md-card-header-green">
+          <div class="card-icon">
+            <md-icon md-font-icon="fas fa-share-square"></md-icon>
+          </div>
+          <h3 class="title">서비스 이미지 목록</h3>
+        </md-card-header>
+        <md-card-content>
+
+          <md-content class="paginated-table table-striped table-hover">
+            <md-toolbar class="md-menu-toolbar table-toolbar">
+              <div layout="row">
+                <span flex></span>
+
+                <md-input-container class="no-error no-label">
+                  <label>Search records</label>
+                  <input type="search" placeholder="Search records" ng-model="searchKeyword">
+                </md-input-container>
+
+              </div>
+            </md-toolbar>
+            <md-content class="md-table-content table-striped table-hover" layout="row" style="background-color: white;">
+              <table flex>
+                <thead>
+                  <tr>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container">
+                        <div class="md-table-head-label">ID</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container">
+                        <div class="md-table-head-label">이름</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">태그</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">저장소</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">d</div>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="md-table-row" ng-repeat="serviceImage in serviceImageList | filter: searchKeyword">
+                    <td class="md-table-cell" flex>
+                      <div class="md-table-cell-container" ng-bind="serviceImage.shortId"></div>
+                    </td>
+                    <td class="md-table-cell">
+                      <div class="md-table-cell-container" ng-bind="serviceImage.name"></div>
+                    </td>
+                    <td class="md-table-cell">
+                      <div class="md-table-cell-container" ng-bind="serviceImage.tag"></div>
+                    </td>
+                    <td class="md-table-cell">
+                      <div class="md-table-cell-container" ng-bind="serviceImage.owner"></div>
+                    </td>
+                    <td class="md-table-cell text-center">
+                      <div class="md-table-cell-container list-command-button" layout="row">
+
+                        <md-button class=" " ng-click="runApplication(appImage)" ng-show="serviceImage.container == null">
+                          <md-icon md-font-icon="fas fa-upload"></md-icon> Load Image
+                        </md-button>
+                        <md-button class=" " ng-click="startApplication(serviceImage)" ng-show="serviceImage.container != null && serviceImage.container.state == 'exited'">
+                          <md-icon md-font-icon="fas fa-play"></md-icon> Start
+                        </md-button>
+                        <md-button class=" " ng-click="stopApplication(serviceImage)" ng-show="serviceImage.container != null && serviceImage.container.state == 'running'">
+                          <md-icon md-font-icon="fas fa-pause"></md-icon> Stop
+                        </md-button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <thead>
+                  <tr>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container">
+                        <div class="md-table-head-label">ID</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container">
+                        <div class="md-table-head-label">이름</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">태그</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">저장소</div>
+                      </div>
+                    </th>
+                    <th class="md-table-head">
+                      <div class="md-table-head-container md-disabled">
+                        <div class="md-table-head-label">d</div>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+            </md-content>
+          </md-content>
+
+        </md-card-content>
+      </md-card>
+    </div>
+
+  </md-content>
+
+</div>

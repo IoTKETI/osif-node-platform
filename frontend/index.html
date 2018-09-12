@@ -55,7 +55,7 @@
   <!-- angular controllers -->
   <script src="app/auth/auth.controller.js"></script>
   <script src="app/dashboard/controller.dashboard.js"></script>
-  <script src="app/openservice/controller.openservice.js"></script>
+  <script src="app/execution/controller.execution.js"></script>
   <script src="app/myservice/controller.myservice.js"></script>
   <script src="app/tools/controller.tools.metadata.js"></script>
 
@@ -91,17 +91,6 @@
               </md-button>
               <div class="nav-sub-group" style="display: block;">
                 <md-list>
-                  <md-list-item>
-                    <a class="md-button nav-item" ui-sref="edit-profile">
-                      <span class="sidebar-mini">P</span><span class="sidebar-normal">프로필 수정</span>
-                    </a>
-                  </md-list-item>
-
-                   <md-list-item>
-                    <a class="md-button nav-item" ui-sref="change-password">
-                      <span class="sidebar-mini">P</span><span class="sidebar-normal">비밀번호 변경</span>
-                    </a>
-                  </md-list-item>
 
                   <md-divider></md-divider>
 
@@ -122,28 +111,14 @@
                 <span>대시보드</span>
               </a>
 
-              <a class="md-button nav-item" ui-sref="openservice">
-                <i class="fas fa-share-square gnb-menu-item"></i>
-                <span>공개 서비스<b class="caret"></b></span>
-              </a>
-
               <a class="md-button nav-item" ui-sref="myservice">
                 <i class="fas fa-user-lock gnb-menu-item"></i>
                 <span>My 서비스<b class="caret"></b></span>
               </a>
-            </div>
-          </md-list-item>
 
-          <md-list-item class="menu"  ng-if="!isLoggedIn()">
-            <div flex class="function-menu nav-block" layout="column">
-              <a class="md-button nav-item" ui-sref="dashboard">
-                <i class="fas fa-chart-area gnb-menu-item"></i>
-                <span>대시보드</span>
-              </a>
-
-              <a class="md-button nav-item" ui-sref="openservice">
-                <i class="fas fa-share-square gnb-menu-item"></i>
-                <span>공개 서비스<b class="caret"></b></span>
+              <a class="md-button nav-item" ui-sref="execution">
+                <i class="fas fa-user-lock gnb-menu-item"></i>
+                <span>실행중인 서비스<b class="caret"></b></span>
               </a>
             </div>
           </md-list-item>
@@ -164,12 +139,6 @@
                 <md-list-item>
                   <a class="md-button nav-item" ui-sref="myservice">
                     <span class="sidebar-mini">G</span><span class="sidebar-normal">활용 가이드</span>
-                  </a>
-                </md-list-item>
-
-                <md-list-item>
-                  <a class="md-button nav-item" ui-sref="tools-metadata">
-                    <span class="sidebar-mini">T</span><span class="sidebar-normal">서비스 메타정보 생성기</span>
                   </a>
                 </md-list-item>
 

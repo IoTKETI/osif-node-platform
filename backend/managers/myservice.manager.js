@@ -1,86 +1,103 @@
-'use strict';
-
-var debug = require("debug")("keti");
-var _ = require("lodash");
-var UserModel = require('../models/user.model.js');
-var ServiceModel = require('../models/service.model.js');
-var MyServiceModel = require('../models/myservice.model.js');
+var Http  = require('request-promise');
+var debug = require('debug')('ciot');
 
 
-function _createMyService(authToken, serviceInfo) {
+exports.listMyServices = (cloudToken)=> {
+
+  return new Promise(function(resolve, reject) {
+
+    try {
+      var options = {
+        method: 'GET',
+        uri: global.CONFIG.cloudPlatform.api + "/myservice",
+        headers: {
+          "x-access-token": cloudToken
+        },
+        json: true
+      };
+
+      Http(options)
+        .then(function (result) {
+
+          resolve(result);
+        }, function (err) {
+          debug('ERROR', err);
+
+          reject(err);
+        });
+    }
+    catch(ex) {
+      debug('EXCEPTION', ex);
+      reject(ex);
+    }
+  });
+}
+
+exports.check = (req, res) => {
+  res.json({
+    success: true,
+    info: req.auth
+  })
+};
+
+
+exports.tokenParser = (req, res, next) => {
+  // read the token from header or url
+  const token = req.headers['x-access-token'] || req.query.token
+
+  // token does not exist
+  if(!token) {
+    req.auth = null;
+    return next();
+  }
+
   return new Promise((resolve, reject)=> {
     try {
+      var auth  = {
+        token: token
+      };
 
-      var _owner = null;
+      jwt.verify(token, req.app.get('jwt-secret'), (err, authToken) => {
+        if(err) {
+          auth.parsed = null;
+          auth.error = err;
 
-      UserModel.findOneByUserId(authToken.userid)
-        .then((userDoc)=> {
-          _owner = userDoc;
+          req.auth = auth;
+          next();
+        }
+        else {
+          auth.parsed = authToken;
+          auth.error = null;
 
-          return ServiceModel.create(_owner, serviceInfo);
-        })
-
-        .then((serviceDoc)=>{
-
-          return MyServiceModel.create(_owner, serviceDoc);
-
-        })
-
-        .then((myserviceDoc)=>{
-
-          resolve(myserviceDoc);
-        })
-
-        .catch((err)=>{
-          debug('ERROR: ', err);
-
-          reject(err);
-        });
-
+          req.auth = auth;
+          next();
+        }
+      });
     }
     catch(ex) {
-      debug('EXCEPTION: ', ex);
-      reject(ex);
+      next();
     }
   });
-}
+};
 
-function _listMyservices(authToken) {
 
-  return new Promise((resolve, reject)=>{
+exports.authCheck = (req, res, next) => {
 
-    try{
-      var _owner = null;
+  if(!req.auth) {
+    return res.status(403).json({
+      success: false,
+      message: 'Login required'
+    });
+  }
 
-      UserModel.findOneByUserId(authToken.userid)
-        .then((userDoc)=> {
-          _owner = userDoc;
+  else if(req.auth.parsed) {
+    return next();
+  }
 
-          return ServiceModel.listMyservices(_owner);
-        })
-
-        .then((myserviceList)=>{
-
-          resolve(myserviceList);
-        })
-
-        .catch((err)=>{
-          debug("ERROR: ", err);
-          reject(err);
-        });
-    }
-    catch(ex) {
-      debug("EXCEPTION: ", ex);
-      reject(ex);
-    }
-
-  });
-
-}
-
-/**
- * Expose 'MyServiceManager'
- */
-module.exports.listMyservices = _listMyservices;
-module.exports.createMyService = _createMyService;
-
+  else {
+    return res.status(403).json({
+      success: false,
+      message: req.auth.error.name
+    });
+  }
+};

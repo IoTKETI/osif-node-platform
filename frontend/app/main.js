@@ -9,7 +9,7 @@
 
     function config($stateProvider, $urlRouterProvider, $mdThemingProvider, localStorageServiceProvider, ChartJsProvider) {
 
-      $urlRouterProvider.otherwise('/dashboard');
+      $urlRouterProvider.otherwise('/execution');
 
       $stateProvider
 
@@ -44,9 +44,9 @@
         })
 
         // List of open service
-        .state('openservice', {
-          url: '/openservice',
-          templateUrl: './app/openservice/view.openservice.html'
+        .state('execution', {
+          url: '/execution',
+          templateUrl: './app/execution/view.execution.html'
         })
 
         // List of open service

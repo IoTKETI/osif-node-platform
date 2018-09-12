@@ -16,8 +16,8 @@
 
     $scope.formData = {
       "login": {
-        "userid": "",
-        "password": ""
+        "userid": "user00001@acme.re.kr",
+        "password": "user1234%^&*"
       },
 
       "signup": {
@@ -137,7 +137,7 @@
 
       authService.requestResetPassword(formData.userid)
         .then(function(user){
-          $state.go('main.dashboard');
+          $state.go('dashboard');
         })
         .catch(function(err){
           console.log('authService.requestResetPassword failed', 'goto login page');
@@ -151,7 +151,7 @@
 
       authService.changePassword($stateParams.token, formData.password, formData.password2)
         .then(function(user){
-          $state.go('main.dashboard');
+          $state.go('dashboard');
         })
         .catch(function(err){
           console.log('authService.changePassword failed', 'goto login page');

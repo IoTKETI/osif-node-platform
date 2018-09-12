@@ -1,30 +1,24 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
-const routes        = require('./backend/routes/index');
+var routes        = require('./backend/routes/index');
 
-const authRoutes    = require('./backend/routes/auth.routes.js');
-const dashboardRoutes  = require('./backend/routes/dashboard.routes.js');
-const openserviceRoutes  = require('./backend/routes/openservice.routes.js');
-const myserviceRoutes  = require('./backend/routes/myservice.routes.js');
+var authRoutes    = require('./backend/routes/auth.routes.js');
+var myserviceRoutes    = require('./backend/routes/myservice.routes.js');
+var applicationRoutes    = require('./backend/routes/application.routes.js');
 
-var authManager = require('./backend/managers/auth.manager.js')
+var authManager   = require('./backend/managers/auth.manager.js')
+
+var uuidv4 = require('uuid/v4');
 
 var config = global.CONFIG;
 
 
-var database = require('./backend/models/mongodb.js');
-database.connect(config);
+var app = express();
 
-
-
-
-
-const app = express();
-
-const env = process.env.NODE_ENV || 'development';
+var env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
 
@@ -35,7 +29,7 @@ app.use(bodyParser.json());
 
 
 // set the secret key variable for jwt
-app.set('jwt-secret', config.security.authSecret);
+app.set('jwt-secret', uuidv4());
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend')));
@@ -45,16 +39,18 @@ app.use('/', routes);
 
 app.use('/auth', authRoutes);
 
-
 app.use('/myservice', authManager.authCheck);
-
-app.use('/dashboard', dashboardRoutes);
-app.use('/openservice', openserviceRoutes);
 app.use('/myservice', myserviceRoutes);
+
+app.use('/apps', authManager.authCheck);
+app.use('/apps', applicationRoutes);
+
+
+//app.use('/myservice', authManager.authCheck);
 
 /// catch 404 and forward to error handler
 app.use((req, res, next) => {
-    const err = new Error('Not Found');
+    var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });

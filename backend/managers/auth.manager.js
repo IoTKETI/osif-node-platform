@@ -1,66 +1,63 @@
 var jwt   = require('jsonwebtoken');
-var User  = require('../models/user.model.js');
+var Http  = require('request-promise');
+var debug = require('debug')('ciot');
 
 
-exports.login = (req, res) => {
-  const {userid, password} = req.body
-  const secret = req.app.get('jwt-secret')
+exports.cloudLogin = (req, res)=> {
+  var {userid, password} = req.body;
+  var secret = req.app.get('jwt-secret');
 
-  // check the user info & generate the jwt
-  // check the user info & generate the jwt
-  const check = (user) => {
-    if(!user) {
-      // user does not exist
-      throw new Error('login failed')
-    } else {
-      // user exists, check the password
-      if(user.verify(password)) {
-        // create a promise that generates jwt asynchronously
-        const p = new Promise((resolve, reject) => {
-          jwt.sign(
-            {
-              username: user.username,
-              userid: user.userid,
-              admin: user.admin
-            },
-            secret,
-            {
-              expiresIn: '1md',
-              issuer: 'CIoT Platform',
-              subject: 'User login'
-            }, (err, token) => {
-              if (err) reject(err)
-              resolve(token)
-            })
+  try {
+    var body = {
+      "userid": userid,
+      "password": password
+    };
+
+    var options = {
+      method: 'POST',
+      uri: global.CONFIG.cloudPlatform.api + "/auth/token",
+      body: body,
+      json: true
+    };
+
+    Http(options)
+      .then(function (result) {
+        var cloudToken = result.token;
+        var decoded = jwt.decode(cloudToken);
+
+        var nodeToken = jwt.sign(
+          {
+            username: decoded.username,
+            userid: decoded.userid,
+            admin: decoded.admin,
+            cloudToken: cloudToken
+          },
+          secret,
+          {
+            expiresIn: '4w',
+            issuer: 'CIoT Node Platform',
+            subject: 'User login'
+          }
+        );
+
+        res.json({
+          message: 'logged in successfully',
+          token: nodeToken
         })
-        return p
-      } else {
-        throw new Error('login failed')
-      }
-    }
-  }
+      }, function (err) {
+        debug('ERROR', err);
 
-  // respond the token
-  const respond = (token) => {
-    res.json({
-      message: 'logged in successfully',
-      token
-    })
+        res.status(403).json({
+          message: err.message
+        })
+      });
   }
-
-  // error occured
-  const onError = (error) => {
-    res.status(403).json({
-      message: error.message
-    })
-  }
-
-  // find the user
-  User.findOneByUserId(userid)
-    .then(check)
-    .then(respond)
-    .catch(onError)
-};
+  catch(ex) {
+    debug('EXCEPTION', ex);
+    res.status(500).json({
+      message: ex.message
+    })  }
+}
 
 exports.check = (req, res) => {
   res.json({

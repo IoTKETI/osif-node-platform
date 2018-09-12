@@ -16,6 +16,7 @@
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "morgan": "^1.6.1",
+    "node-docker-api": "^1.1.22",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
     "serve-favicon": "^2.3.0",
