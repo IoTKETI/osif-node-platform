@@ -1,5 +1,6 @@
 FROM hypriot/rpi-node:latest
 
+
 # 앱 디렉터리 생성
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -11,6 +12,7 @@ COPY .bowerrc /usr/src/app/
 RUN npm install && npm install -g bower
 RUN bower install --allow-root
 
+EXPOSE 8899
 
 # 앱 소스 추가
 COPY . /usr/src/app
