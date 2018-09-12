@@ -6,7 +6,10 @@ WORKDIR /usr/src/app
 
 # 앱 의존성 설치
 COPY package.json /usr/src/app/
-RUN npm install
+COPY bower.json /usr/src/app/
+COPY .bowerrc /usr/src/app/
+RUN npm install && npm install -g bower
+RUN bower install --allow-root
 
 
 # 앱 소스 추가

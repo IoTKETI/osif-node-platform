@@ -4,7 +4,8 @@ var debug = require('debug')('ciot');
 
 
 exports.cloudLogin = (req, res)=> {
-  var {userid, password} = req.body;
+  var userid = req.body.userid;
+  var password = req.body.password;
   var secret = req.app.get('jwt-secret');
 
   try {
