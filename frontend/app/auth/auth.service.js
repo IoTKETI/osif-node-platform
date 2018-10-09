@@ -14,8 +14,6 @@
   function AuthService($http, $state, notificationService, localStorageService) {
 
     var services = {
-      "getLoginUser": _getLoginUser,
-      "getAuthToken": _getAuthToken,
       "addAccessTokenHeader": _addAccessTokenHeader,
 
       "login": _login,
@@ -26,17 +24,6 @@
       "changePassword": _changePassword,
     };
     return services;
-
-
-    function _getLoginUser() {
-      var authToken = localStorageService.get('authToken');
-      if(authToken) {
-        return jwt_decode(authToken);
-      }
-      else {
-        return null;
-      }
-    }
 
     function _addAccessTokenHeader(httpOptions, doNotForward) {
       var authToken = localStorageService.get('authToken') || null;
@@ -51,21 +38,6 @@
         httpOptions.headers["x-access-token"] = authToken;
         return httpOptions;
       }
-    }
-
-    function _getAuthToken(doNotForward) {
-
-      var authToken = localStorageService.get('authToken');
-      if(authToken) {
-        return authToken;
-      }
-      else if(!doNotForward) {
-        console.log('_getAuthToken', 'goto login page');
-
-        return $state.go('login');
-      }
-
-      return authToken;
     }
 
     function _login(userid, password) {
@@ -87,10 +59,7 @@
 
           .then(function(response){
             localStorageService.set('authToken', response.data.token);
-
-            console.log( response.data.token );
-            console.log( jwt_decode(response.data.token));
-
+            localStorageService.set('loginUser', jwt_decode(response.data.token));
 
             resolve(response.data);
           })
@@ -160,7 +129,7 @@
           $http(httpOptions)
 
           .then(function(response){
-            localStorageService.remove('authToken');
+            localStorageService.remove('authToken', 'loginUser');
 
             resolve(response.data);
           })
@@ -219,12 +188,12 @@
 
     function _logout() {
       try {
-        localStorageService.remove('authToken');
+        localStorageService.remove('authToken', 'loginUser');
         $state.reload();
       }
       catch(ex) {
         notificationService.showErrorMessage(ex);
-        localStorageService.remove('authToken');
+        localStorageService.remove('authToken', 'loginUser');
         $state.reload();
       }
     } //  end of function _logout()

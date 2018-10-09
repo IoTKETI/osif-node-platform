@@ -36,7 +36,7 @@ exports.cloudLogin = (req, res)=> {
           secret,
           {
             expiresIn: '4w',
-            issuer: 'CIoT Node Platform',
+            issuer: 'OSIF Device Platform',
             subject: 'User login'
           }
         );

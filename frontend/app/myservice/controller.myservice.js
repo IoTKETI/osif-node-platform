@@ -7,9 +7,9 @@
     .controller('myServiceController', MyServiceController)
   ;
 
-  MyServiceController.$inject = ['$scope', '$state', '$mdDialog', 'apiService', 'authService'];
+  MyServiceController.$inject = ['$scope', '$state', '$mdDialog', 'apiService', 'authService', 'localStorageService'];
 
-  function MyServiceController($scope, $state, $mdDialog, apiService, authService) {
+  function MyServiceController($scope, $state, $mdDialog, apiService, authService, localStorageService) {
 
     $scope.init = _init;
 
@@ -18,7 +18,7 @@
 
 
     function _init() {
-      $scope.loginUser = authService.getLoginUser();
+      $scope.loginUser = localStorageService.get('loginUser');
 
       apiService.listMyServices()
         .then(function(myServiceList){

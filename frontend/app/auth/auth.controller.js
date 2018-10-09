@@ -16,8 +16,8 @@
 
     $scope.formData = {
       "login": {
-        "userid": "user00001@acme.re.kr",
-        "password": "user1234%^&*"
+        "userid": "iot01@keti.re.kr",
+        "password": "user123"
       },
 
       "signup": {
@@ -69,7 +69,7 @@
 
       authService.login(formData.userid, formData.password)
         .then(function(user){
-          $state.go('dashboard');
+          $state.go('execution');
         })
         .catch(function(err){
           notificationService.showErrorMessage(err.data);
@@ -137,7 +137,7 @@
 
       authService.requestResetPassword(formData.userid)
         .then(function(user){
-          $state.go('dashboard');
+          $state.go('execution');
         })
         .catch(function(err){
           console.log('authService.requestResetPassword failed', 'goto login page');
@@ -151,7 +151,7 @@
 
       authService.changePassword($stateParams.token, formData.password, formData.password2)
         .then(function(user){
-          $state.go('dashboard');
+          $state.go('excution');
         })
         .catch(function(err){
           console.log('authService.changePassword failed', 'goto login page');
