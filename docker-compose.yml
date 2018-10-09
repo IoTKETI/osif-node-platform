@@ -1,0 +1,19 @@
+version: "3.5"
+services:
+  osif_node_platform:
+    container_name: osif_node_platform
+    image: dev.synctechno.com:5000/osif-node-platform:rpi
+    ports:
+    - "8000:8899" # 연결할 포트
+    volumes:
+    - /var/run:/var/run
+    depends_on:
+    - raspberrycast
+
+  raspberrycast:
+    container_name: raspberrycast
+    image: dev.synctechno.com:5000/raspberrycast:rpi
+    ports:
+    - "5701:5701"
+    environment:
+    - JAVA_OPTS=-Dhazelcast.local.publicAddress=127.0.0.1:5701
