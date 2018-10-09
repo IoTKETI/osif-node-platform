@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var debug = require('debug')('ciot');
+var debug = require('debug')('osif');
 
 var applicationManager = require('../managers/application.manager.js')
 

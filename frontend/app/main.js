@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('ciotPlatform', ['ui.router', 'LocalStorageModule', 'ngMaterial', 'jsonFormatter', 'ngclipboard', 'chart.js'])
+    .module('osifNodePlatform', ['ui.router', 'LocalStorageModule', 'ngMaterial', 'jsonFormatter', 'ngclipboard', 'chart.js'])
     .config(config)
     .controller('mainController', MainController)
     .run(run);
@@ -60,7 +60,7 @@
 
 
       localStorageServiceProvider
-        .setPrefix('ciotPlatform')
+        .setPrefix('osifNodePlatform')
         .setStorageType('localStorage')
         .setNotify(true, true);
 

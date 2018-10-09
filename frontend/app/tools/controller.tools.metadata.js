@@ -3,7 +3,7 @@
 
 
   angular
-    .module('ciotPlatform')
+    .module('osifNodePlatform')
     .controller('toolsMetadataController', ToolsMetadataController)
   ;
 

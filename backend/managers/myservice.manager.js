@@ -1,5 +1,5 @@
 var Http  = require('request-promise');
-var debug = require('debug')('ciot');
+var debug = require('debug')('osif');
 
 
 exports.listMyServices = (cloudToken)=> {

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('ciotPlatform')
+    .module('osifNodePlatform')
     .service('apiService', ApiService);
 
 

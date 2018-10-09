@@ -1,5 +1,5 @@
 {
-  "name": "ciot-platform",
+  "name": "osif-node-platform",
   "version": "0.0.1",
   "private": true,
   "main": "app.js",

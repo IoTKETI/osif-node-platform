@@ -3,7 +3,7 @@
   'use strict';
 
   angular
-    .module('ciotPlatform')
+    .module('osifNodePlatform')
     .service('authService', AuthService);
 
 

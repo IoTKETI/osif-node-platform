@@ -1,6 +1,6 @@
 var jwt   = require('jsonwebtoken');
 var Http  = require('request-promise');
-var debug = require('debug')('ciot');
+var debug = require('debug')('osif');
 
 
 exports.cloudLogin = (req, res)=> {
