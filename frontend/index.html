@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="osifNodePlatform">
+<head>
+  <meta charset="utf-8">
+
+	<title>OSIF Device Platform</title>
+  <meta app-version="V2.0-r20180523-01" />
+
+	<meta name = "format-detection" content = "telephone=no" />
+
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/template.css">
+
+  <link type="text/css" rel="stylesheet" href="css/gnb.css">
+  <link type="text/css" rel="stylesheet" href="css/auth.css">
+  <link type="text/css" rel="stylesheet" href="css/openservice.css">
+  <link type="text/css" rel="stylesheet" href="app/tools/style.tools.css">
+
+  <!--  Font awesome  -->
+  <link rel='stylesheet' href='components/fontawesome/web-fonts-with-css/css/fontawesome-all.css' />
+
+  <!-- jQuery, Angular.js, UI Router, Angular-material -->
+  <link rel="stylesheet" href="components/angular-material/angular-material.css">
+
+  <!-- JSON formatter -->
+  <link rel="stylesheet" href="components/json-formatter/dist/json-formatter.css">
+
+  <script src="components/jquery/dist/jquery.min.js"></script>
+  <script src="components/angular/angular.min.js"></script>
+  <script src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="components/angular-aria/angular-aria.js"></script>
+  <script src="components/angular-animate/angular-animate.min.js"></script>
+  <script src="components/angular-messages/angular-messages.js"></script>
+  <script src="components/angular-material/angular-material.js"></script>
+  <script src="components/angular-local-storage/dist/angular-local-storage.js"></script>
+  <script src="components/jwt-decode/build/jwt-decode.js"></script>
+  <script src="components/json-formatter/dist/json-formatter.js"></script>
+  <script src="components/clipboard/dist/clipboard.js"></script>
+  <script src="components/ngclipboard/dist/ngclipboard.js"></script>
+
+  <script src="components/chart.js/dist/Chart.js"></script>
+  <script src="components/angular-chart.js/dist/angular-chart.js"></script>
+
+  <script src="app/main.js"></script>
+
+  <!-- angular directives -->
+  <script src="app/common/directives.js"></script>
+
+  <!-- angular services -->
+  <script src="app/common/service.notification.js"></script>
+  <script src="app/common/service.api.js"></script>
+  <script src="app/auth/auth.service.js"></script>
+
+  <!-- angular controllers -->
+  <script src="app/auth/auth.controller.js"></script>
+  <script src="app/execution/controller.execution.js"></script>
+  <script src="app/myservice/controller.myservice.js"></script>
+  <script src="app/tools/controller.tools.metadata.js"></script>
+
+
+</head>
+<body class="" ng-cloak layout="row" ng-controller="mainController" ng-init="init()" ng-classc="">
+  <section layout="row" flex>
+
+    <md-sidenav
+      class="gnb-sidebar md-sidenav-left"
+      md-component-id="gnb-sidebar"
+      md-is-locked-open="true"
+      md-whiteframe="4"
+      layout="column"
+    >
+
+      <div class="logo">
+        <nav class="right keti-ci" >
+          <img src="img/keti.jpg" />
+        </nav>
+      </div>
+
+
+      <div class="sidebar-wrapper" layout="row">
+
+        <md-list flex>
+          <md-list-item class="user" ng-if="isLoggedIn()">
+            <div flex class="user-info nav-block" layout="column">
+              <md-button class="nav-item" data-toggle="collapse" style="font-size: 25px;" aria-label="Login user">
+                <i class="far fa-user-circle photo"></i>
+
+                <span ng-bind="loginUser.username"><b class="caret"></b></span>
+              </md-button>
+              <div class="nav-sub-group" style="display: block;">
+                <md-list>
+
+                  <md-divider></md-divider>
+
+                  <md-list-item>
+                    <a class="md-button nav-item" ng-click="onLogout()">
+                      <span class="sidebar-mini">P</span><span class="sidebar-normal">Logout</span>
+                    </a>
+                  </md-list-item>
+                </md-list>
+              </div>
+            </div>
+          </md-list-item>
+
+          <md-list-item class="menu"  ng-if="isLoggedIn()">
+            <div flex class="function-menu nav-block" layout="column">
+              <a class="md-button nav-item" ui-sref="execution">
+                <i class="fas fa-user-lock gnb-menu-item"></i>
+                <span>Installed services<b class="caret"></b></span>
+              </a>
+
+              <a class="md-button nav-item" ui-sref="myservice">
+                <i class="fas fa-user-lock gnb-menu-item"></i>
+                <span>My Services<b class="caret"></b></span>
+              </a>
+            </div>
+          </md-list-item>
+
+          <md-list-item class="menu">
+            <div flex class="information-menu nav-block" layout="column">
+
+              <a class="md-button nav-item" ui-sref="about">
+                <i class="fas fa-info gnb-menu-item"></i>
+                <span>ABOUT OSIF</span>
+              </a>
+
+              <a class="md-button nav-item" ui-sref="userguide">
+                <i class="fas fa-chalkboard-teacher gnb-menu-item"></i>
+                <span>USER GUIDES</span>
+              </a>
+              <md-list class="nav-sub-group" style="display: block;">
+                <md-list-item>
+                  <a class="md-button nav-item" ui-sref="myservice">
+                    <span class="sidebar-mini">G</span><span class="sidebar-normal">DEVELOPERS GUIDE</span>
+                  </a>
+                </md-list-item>
+
+              </md-list>
+            </div>
+          </md-list-item>
+        </md-list>
+      </div>
+
+    </md-sidenav>
+
+    <div class="ui-base" flex layout="column">
+      <md-toolbar flex="none" class="osif-top-toolbar">
+        <div class="md-toolbar-tools">
+          <md-button class="nav-back md-icon-button" aria-label="Toggle sidenav" ng-click="toggleSideNav()">
+            <i class="fas fa-arrow-left"></i>
+          </md-button>
+
+          <h3 flex md-truncate>OSIF Device Platform</h3>
+
+          <div flex="none">
+
+
+            <md-menu>
+              <md-button aria-label="Open user profile menu" ng-click="openUserProfileMenu($mdMenu, $event)">
+                <md-icon md-font-icon="fas fa-user top-menu-button"></md-icon> <span ng-bind="loginUser.username"></span>
+              </md-button>
+              <md-menu-content width="4">
+                <md-menu-item ng-if="!isLoggedIn()">
+                  <a class="md-button" ui-sref="login">
+                    <md-icon md-font-icon="fas fa-sign-in-alt top-menu-button"></md-icon> Login
+                  </a>
+                </md-menu-item>
+                <md-menu-item ng-if="!isLoggedIn()">
+                  <md-button ui-sref="signup">
+                    <md-icon md-font-icon="fas fa-user-plus top-menu-button"></md-icon> Sign in
+                  </md-button>
+                </md-menu-item>
+
+                <md-menu-item ng-if="isLoggedIn()">
+                  <md-button ng-click="onLogout()">
+                    <md-icon md-font-icon="fas fa-sign-out-alt top-menu-button"></md-icon> Logout
+                  </md-button>
+                </md-menu-item>
+                <md-menu-item ng-if="isLoggedIn()">
+                  <a class="md-button" ui-sref="user-profile">
+                    <md-icon md-font-icon="far fa-id-card top-menu-button"></md-icon> User profile
+                  </a>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+
+          </div>
+        </div>
+      </md-toolbar>
+
+      <div ui-view flex layout="column" class="main-content"></div>
+    </div>
+  </section>
+</body>
+</html>

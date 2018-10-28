@@ -1,0 +1,25 @@
+.version-code-separator {
+  font-size: 30pt;
+  line-height: 55pt;
+  color: gray;
+}
+
+.opendata-list {
+  max-height: 400px !important;
+}
+
+.scroll-wrap {
+  overflow: auto;
+}
+
+md-list-item.opendata-item.active {
+  background-color: rgba(0, 183, 255, 0.19);
+
+}
+
+
+
+
+#create-metadata-dialog {
+  min-width: 550px;
+}

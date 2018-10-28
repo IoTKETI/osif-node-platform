@@ -1,0 +1,67 @@
+
+md-sidenav.gnb-sidebar {
+  background-color: #ffffff;
+  color: #313131 !important;
+}
+
+md-sidenav.gnb-sidebar .sidebar-wrapper {
+  width: 100%;
+}
+
+md-sidenav.gnb-sidebar .nav-block {
+  border-bottom: 1px solid lightgray;
+  padding: 20px 5px;
+}
+
+md-sidenav.gnb-sidebar .md-button {
+  text-align: left;
+  width: 100%;
+}
+
+md-sidenav.gnb-sidebar .nav-item {
+  margin-top: 20px !important;
+  margin-bottom: 0 !important;
+}
+
+md-sidenav.gnb-sidebar .sidebar-mini {
+  margin-right: 20px;
+  width: 20px;
+  display: inline-block;
+}
+
+md-sidenav.gnb-sidebar .nav-sub-group {
+  padding-left: 20px;
+}
+md-sidenav.gnb-sidebar .nav-sub-group .nav-item {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  min-height: 26px !important;
+  line-height: 26px !important;
+}
+md-sidenav.gnb-sidebar .nav-sub-group md-list-item {
+  height: 30px !important;
+  min-height: 30px !important;
+  line-height: 30px !important;
+}
+
+md-sidenav.gnb-sidebar .gnb-menu-item {
+  text-align: center;
+  font-size: 20px;
+  width: 40px;
+  display: inline-block;
+}
+
+md-toolbar.osif-top-toolbar {
+  font-size: 15px !important;
+  color: #555 !important;
+  background-color: #eee;
+}
+
+md-icon.top-menu-button {
+  font-size: 18px !important;
+  color: #000 !important;
+}
+
+.main-content {
+  background-color: #eee;
+}

@@ -1,0 +1,37 @@
+<div flex layout="row" layout-align="center center" ng-controller="authController" >
+  <div flex="50" layout="column" layout-align="center center">
+    <md-card class="login-box login-form" >
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Login</span>
+          <span class="md-subhead">Need to login</span>
+        </md-card-title-text>
+      </md-card-title>
+
+      <md-card-content>
+        <div layout="column">
+          <md-input-container class="md-block">
+            <label>User ID (email)</label>
+            <input ng-model="formData.login.userid" type="text">
+          </md-input-container>
+
+          <md-input-container class="md-block">
+            <label>Password</label>
+            <input ng-model="formData.login.password" type="password">
+          </md-input-container>
+        </div>
+      </md-card-content>
+
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="login()">Login</md-button>
+        <md-button ui-sref="password-reset">Fogot password</md-button>
+      </md-card-actions>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ui-sref="signup">Sign in</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+
+
+
+</div>

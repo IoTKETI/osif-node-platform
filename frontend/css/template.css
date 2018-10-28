@@ -1,0 +1,158 @@
+
+/**
+    md-card 공통
+ */
+md-card {
+  padding: 0 15px;
+}
+
+md-card {
+  margin: 30px 15px !important;
+  border-radius: 10px;
+}
+
+md-card md-card-header {
+  padding: 0;
+  margin: 0;
+}
+md-card md-card-actions {
+  margin: 0 15px 10px;
+  font-size: 14px;
+  padding: 10px 0 0 0;
+  border-top: 1px solid #eeeeee;
+}
+
+
+/** md-card 공통 **/
+
+
+
+/**
+  헤더에 icon을 포함하는 md-card
+
+  md-card md-card-header.md-card-header-icon .card-icon 에 대한 배경색
+ */
+
+md-card md-card-header.md-card-header-icon  .card-icon {
+  border-radius: 3px;
+  background-color: #999999;
+  padding: 15px;
+  margin-top: -30px;
+  margin-right: 15px;
+  float: left;
+
+  -webkit-box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);
+  box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);
+}
+
+md-card md-card-header.md-card-header-icon .card-icon i,
+md-card md-card-header.md-card-header-icon .card-icon md-icon {
+  color: white;
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  font-size: 36px !important;
+  text-align: center;
+}
+
+md-card md-card-header.md-card-header-icon .sub-title {
+  margin: 0;
+  padding-top: 10px;
+
+  font-size: 14px;
+  color: #999999;
+  text-align: right;
+}
+md-card md-card-header.md-card-header-icon .title {
+  margin: 0;
+
+  text-align: right;
+  color: #3c4858;
+}
+
+
+
+
+md-card md-card-header.md-card-header-icon.md-card-header-blue  .card-icon {
+  background: linear-gradient(60deg, #26c6da, #00acc1);
+}
+md-card md-card-header.md-card-header-icon.md-card-header-primary .card-icon {
+  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+}
+md-card md-card-header.md-card-header-icon.md-card-header-green .card-icon {
+  background: linear-gradient(60deg, #66bb6a, #43a047);
+}
+md-card md-card-header.md-card-header-icon.md-card-header-warning .card-icon {
+  background: linear-gradient(60deg, #ffa726, #fb8c00);
+}
+md-card md-card-header.md-card-header-icon.md-card-header-danger .card-icon {
+  background: linear-gradient(60deg, #ef5350, #e53935);
+}
+md-card md-card-header.md-card-header-icon.md-card-header-rose .card-icon {
+  background: linear-gradient(60deg, #ec407a, #d81b60);
+}
+
+
+
+
+.table-striped tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+
+
+.text-right {
+  text-align: right;
+  padding-right: 10px;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+  padding-left: 10px;
+}
+
+
+md-card.md-card-chart .md-card-header {
+  position:relative;
+  border-radius: 6px ;
+  box-shadow: rgba(233, 30, 99, 0.28) 0px 12px 20px -10px, rgba(0, 0, 0, 0.12) 0px 4px 20px 0px, rgba(233, 30, 99, 0.2) 0px 7px 8px -5px ;
+  box-sizing: border-box ;
+  display: block ;
+  height: 145px;
+  margin: -20px 15px 0 15px;
+  padding: 10px;
+  z-index: 2 ;
+}
+
+
+md-card.md-card-chart .md-card-header {
+  background-attachment: scroll;
+  background-clip: border-box ;
+  background-color: rgba(0, 0, 0, 0) ;
+  background-origin: padding-box ;
+  background-position-x: 0% ;
+  background-position-y: 0% ;
+  background-size: auto ;
+}
+
+md-card.md-card-chart .md-card-header.md-card-header-green {
+  background-image: linear-gradient(60deg, rgb(102, 187, 106), rgb(67, 160, 71));
+}
+
+md-card.md-card-chart .md-card-header.md-card-header-rose {
+  background-image: linear-gradient(60deg, rgb(236, 64, 122), rgb(216, 27, 96));
+}
+
+md-card.md-card-chart .md-card-header.md-card-header-blue {
+  background-image: linear-gradient(60deg, rgb(38, 198, 218), rgb(0, 172, 193));
+}
+
+
+md-card.md-card-chart .chart {
+  height: 100% !important;
+}

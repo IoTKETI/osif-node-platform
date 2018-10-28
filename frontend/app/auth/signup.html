@@ -1,0 +1,42 @@
+<div flex layout="row" layout-align="center center" ng-controller="authController" >
+
+  <md-card class="signin-form" >
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Sign in</span>
+        <span class="md-subhead">Create new account.</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <div layout="column">
+        <md-input-container class="md-block">
+          <label>User name</label>
+          <input ng-model="formData.signup.username" type="text" on-key-enter="signup()" class="form-control" ng-required="true" placeholder="User name">
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <label>User account (email)</label>
+          <input ng-model="formData.signup.userid" type="text" on-key-enter="signup()" class="form-control" ng-required="true" placeholder="email">
+        </md-input-container>
+
+        <div layout="row">
+          <md-input-container class="md-block">
+            <label>Password</label>
+            <input ng-model="formData.signup.password" type="password">
+          </md-input-container>
+
+          <md-input-container class="md-block">
+            <label>Password confirm</label>
+            <input ng-model="formData.signup.password2" type="password">
+          </md-input-container>
+        </div>
+      </div>
+
+    </md-card-content>
+
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-click="signup()">Sign in</md-button>
+    </md-card-actions>
+  </md-card>
+
+</div>
